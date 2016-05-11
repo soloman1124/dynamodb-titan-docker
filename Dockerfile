@@ -17,3 +17,5 @@ RUN /usr/src/app/src/test/resources/install-gremlin-server.sh \
     && rm /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1.zip
 
 WORKDIR /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1
+
+ENTRYPOINT /bin/bash
