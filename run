@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-envsubst < /usr/src/app/dynamodb-local.properties.template > /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/conf/gremlin-server/dynamodb-local.properties
-envsubst < /usr/src/app/gremlin-server-local.yaml.template > /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/conf/gremlin-server/gremlin-server-local.yaml
+SERVER_DIR=/usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1
 
-exec /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/bin/gremlin-server.sh /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/conf/gremlin-server/gremlin-server-local.yaml
+envsubst < /usr/src/app/dynamodb-local.properties.template > $SERVER_DIR/conf/gremlin-server/dynamodb-local.properties
+envsubst < /usr/src/app/gremlin-server-local.yaml.template > $SERVER_DIR/conf/gremlin-server/gremlin-server-local.yaml
+
+if [ -z "$1" ]
+then
+  exec $SERVER_DIR/bin/gremlin-server.sh $SERVER_DIR/conf/gremlin-server/gremlin-server-local.yaml
+elif [ "$1" == "console" ]
+then
+  exec $SERVER_DIR/bin/gremlin.sh
+else
+  exec $SERVER_DIR/$1
+fi

@@ -26,4 +26,4 @@ WORKDIR /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1
 
 EXPOSE $GREMLIN_PORT
 
-CMD ["/usr/src/app/run"]
+ENTRYPOINT ["/usr/src/app/run"]
