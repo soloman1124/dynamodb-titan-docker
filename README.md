@@ -13,6 +13,7 @@ app:
   build: .
   links:
     - titan_server
+    - dynamodb
   ports:
     - 5000:5000
   volumes:
@@ -22,7 +23,7 @@ titan_server:
   links:
     - dynamodb
   environment:
-    - DYNAMODB_ENDPOINT: http://dynamodb:8000
+    - DYNAMODB_ENDPOINT=http://dynamodb:8000
   ports:
     - 8182:8182
 dynamodb:
@@ -46,3 +47,11 @@ dynamodb_data:
     - ./.dynamodb_wd:/var/dynamodb_local
   entrypoint: /bin/true
 ```
+
+
+With the example docker compose file, the following are supported:
+
+- execute the titan server: `docker-compose up titan_server`
+- execute the gremlin console: `docker-compose run titan_server console`
+- execute arbitrary script in side of titan server dir:
+  `docker-compose run titan_server <script_file>`  
