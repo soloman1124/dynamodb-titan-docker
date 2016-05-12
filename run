@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+envsubst < cat /usr/src/app/dynamodb-local.properties.template > /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/conf/gremlin-server/dynamodb-local.properties
+envsubst < cat /usr/src/app/gremlin-server-local.yaml.template > /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/conf/gremlin-server/gremlin-server-local.yaml
+
+exec bin/gremlin-server.sh /usr/src/app/server/dynamodb-titan100-storage-backend-1.0.0-hadoop1/conf/gremlin-server/gremlin-server-local.yaml
